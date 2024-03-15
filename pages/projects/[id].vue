@@ -23,14 +23,29 @@ async function fetchProject() {
   }
 }
 
+
 onMounted(fetchProject)
 </script>
 
 <template>
-  <div v-if="project">
-    <h1>{{ project.name }}</h1>
+  <div v-if="project" class="mx-5 mt-5">
+
+    <h1 class= "">{{ project.name }}</h1>
+    <p class= "">{{ project.tags }}</p>
     <p>{{ project.date }}</p>
-    <p>{{ project.description }}</p>
+    <div class="row">
+    <div class="col-md-6">
+      <p>{{ project.description }}</p>
+      <div class="my-3">
+      </div>
+    </div>
+    <div class="col-md-6">
+
+      <div class="my-3">
+      </div>
+    </div>
+  </div>
+
   </div>
   <div v-else>
     <p>Loading project...</p>
