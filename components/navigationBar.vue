@@ -11,7 +11,7 @@
               <nuxt-link to="/" class="nav-link">Home</nuxt-link>
             </li>
             <li class="nav-item">
-              <nuxt-link to="/about" class="nav-link">About me</nuxt-link>
+              <nuxt-link to="/aboutMe" class="nav-link">About me</nuxt-link>
             </li>
             <li class="nav-item">
               <nuxt-link to="/contact" class="nav-link">Contact</nuxt-link>
