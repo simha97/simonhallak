@@ -1,7 +1,9 @@
 <script setup>
+import { ref, onMounted } from 'vue'
 import { createClient } from '@supabase/supabase-js'
 const supabase = createClient('https://zczbffrkrnrupttvvbvo.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpjemJmZnJrcm5ydXB0dHZ2YnZvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTAxNzc2MDUsImV4cCI6MjAyNTc1MzYwNX0.t4HDl0WdDRz2Vsg96yRsJn0x8OnzfHusEodWXUIoG78')
 const projects = ref([])
+const selectedArea = ref("all") // Add this line
 
 async function getProjects() {
   const { data } = await supabase.from('projects').select()
@@ -11,29 +13,71 @@ async function getProjects() {
 onMounted(() => {
   getProjects()
 })
+
+function setSelectedArea(area) {
+  selectedArea.value = area;
+}
+
+// Computed property to filter projects based on the selected area
+const filteredProjects = computed(() => {
+  if (selectedArea.value === "all") {
+    return projects.value;
+  }
+  return projects.value.filter(project => project.area === selectedArea.value);
+});
+
 </script>
 
 <template>
   <div class="container mt-3">
-  <div class="row justify-content-center">
-    
-    <div v-for="project in projects" :key="project.id" class="projects col-md-4 d-flex align-items-stretch my-3">
-      <NuxtLink :to="`/projects/${project.id}`">
-
-      <card :title="project.name" :tags="project.tags" :date="project.date" :imageName="project.name" class="w-100"/>
-    </NuxtLink>
+    <!-- Filter Tabs -->
+    <div class="tabs">
+      <button @click="setSelectedArea('all')" :class="{ 'active': selectedArea === 'all' }">All</button>
+      <button @click="setSelectedArea('XR')" :class="{ 'active': selectedArea === 'XR' }">XR</button>
+      <button @click="setSelectedArea('Web design')" :class="{ 'active': selectedArea === 'Web design' }">Web design</button>
+      <button @click="setSelectedArea('Visualisation')" :class="{ 'active': selectedArea === 'Visualisation' }">Visualisation</button>
+      <button @click="setSelectedArea('Entrepreneurship')" :class="{ 'active': selectedArea === 'Entrepreneurship' }">Entrepreneurship</button>
+    </div>
+    <div class="row justify-content-center">
+      <!-- Use filteredProjects for v-for instead of projects -->
+      <div v-for="project in filteredProjects" :key="project.id" class="projects col-md-4 d-flex align-items-stretch my-3">
+        <NuxtLink :to="`/projects/${project.id}`">
+          <card :title="project.name" :tags="project.tags" :date="project.date" :imageName="project.name" class="w-100"/>
+        </NuxtLink>
+      </div>
     </div>
   </div>
-</div>
-
-
 </template>
 
-
 <style scoped>
-.projects a{
+.projects a {
     text-decoration: none !important; /* Remove underline from anchor tags */
-
+}
+.tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* Adds some space between buttons */
+    margin-bottom: 20px;
+}
+.tabs button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px; /* Rounded corners */
+    background-color: #f0f0f0;
+    color: #333;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
 }
 
+.tabs button:hover, .tabs button.active {
+    background-color: #25384c; /* Darker shade on hover and for active button */
+    color: #fff; /* White text on active/hover state */
+}
+
+/* Styling for indicating the active tab */
+.tabs button.active {
+    font-weight: bold;
+}
 </style>
+
