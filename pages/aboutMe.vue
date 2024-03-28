@@ -68,7 +68,20 @@
   animation: slideIn 1s ease-out forwards;
 }
 
-
+@media (max-width: 768px) {
+  .font-weight-bold, .boldtext {
+    font-size: 16px; /* Smaller font size on mobile */
+  }
+  .text-container, .slide-in img {
+    margin-left: 0;
+    margin-right: 0;
+    max-width: 100%; /* Ensure images are not wider than the screen */
+  }
+  .scroll-indicator {
+    font-size: 24px; /* Adjust size for better visibility on small screens */
+    margin-top: 30px; /* Reduce margin */
+  }
+}
 
 </style>
 

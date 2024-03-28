@@ -5,12 +5,12 @@
           <p>Phone: +46760611353</p>
           <p>Email: simon.hallak.3@gmail.com</p>      
           <!-- Linkedin -->
-            <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+            <a class="btn btn-outline-light btn-floating m-1" href="https://www.linkedin.com/in/simon-hallak-2738a318b/" role="button" target="_blank">
         <img src="/images/linkedin.png" alt="LinkedIn" style="width: 24px; height: 24px;">
       </a>
 
       <!-- Github -->
-      <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+      <a class="btn btn-outline-light btn-floating m-1" href="https://github.com/simha97" role="button" target="_blank">
         <img src="/images/github.png" alt="GitHub" style="width: 24px; height: 24px;">
       </a>
     </section>

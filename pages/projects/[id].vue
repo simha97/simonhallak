@@ -45,16 +45,16 @@ onMounted(fetchProject)
       <p>{{ project.learning }}</p>
 
       <div v-if="project.githubLink">
-        <a :href="project.githubLink">Here is the link to the github repository</a>
+        <a :href="project.githubLink" target="_blank">Here is the link to the github repository</a>
       </div>
       <div v-if="project.websiteLink">
-        <a :href="project.websiteLink">Here is a link to the project website</a>
+        <a :href="project.websiteLink" target="_blank">Here is a link to the project website</a>
       </div>
       <div v-if="project.prototypeLink">
-        <a :href="project.prototypeLink">Here is a link to the prototype</a>
+        <a :href="project.prototypeLink" target="_blank">Here is a link to the prototype</a>
       </div>
         <div v-if="project.pdfLink">
-        <a :href="project.pdfLink">Here is a link to the PDF</a>
+        <a :href="project.pdfLink" target="_blank">Here is a link to the PDF</a>
       </div>
 
     </div>
