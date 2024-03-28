@@ -53,6 +53,10 @@ onMounted(fetchProject)
       <div v-if="project.prototypeLink">
         <a :href="project.prototypeLink">Here is a link to the prototype</a>
       </div>
+        <div v-if="project.pdfLink">
+        <a :href="project.pdfLink">Here is a link to the PDF</a>
+      </div>
+
     </div>
     <div class="col-md-6">
 

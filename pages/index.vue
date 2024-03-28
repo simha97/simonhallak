@@ -17,7 +17,7 @@ onMounted(() => {
   <div class="container mt-3">
   <div class="row justify-content-center">
     
-    <div v-for="project in projects" :key="project.id" class="col-md-4 d-flex align-items-stretch my-3">
+    <div v-for="project in projects" :key="project.id" class="projects col-md-4 d-flex align-items-stretch my-3">
       <NuxtLink :to="`/projects/${project.id}`">
 
       <card :title="project.name" :tags="project.tags" :date="project.date" :imageName="project.name" class="w-100"/>
@@ -28,3 +28,12 @@ onMounted(() => {
 
 
 </template>
+
+
+<style scoped>
+.projects a{
+    text-decoration: none !important; /* Remove underline from anchor tags */
+
+}
+
+</style>

@@ -1,43 +1,75 @@
 <template>
-  <div class="container row">
-    <div class="text-section col-md-6 align-self-center">
-      <h1 class="mx-3">A media technology engineer who loves to travel and discover the world and new cultures.</h1>
-      <p class="mx-3">Expertise in web design, game development, and much more.</p>
+  <div class="container my-5">
+    <!-- Top Section -->
+    <div class="row">
+      <div class="col-md-6 my-auto">
+        <div class="text-container fade-in" style="margin-left: 20px;">
+          <p class="font-weight-bold text-center boldtext">A Media Technology engineer who loves new adventures</p>
+          <p class="text-center">Just a simple guy who loves to learn, travel, culture, and pizza. <br><br>I've spent my time at university learning about different areas of digital design: including front-end development, app UX/UI, game development, and VR design. I have also gained valuable insights into entrepreneurship, leadership, and innovation. <br>I am currently working on my master's thesis in sleep enhancement by sounds.
+            <br><br>In my free time, I enjoy spending time with people, walking in the forest, and petting all the cute dogs and cats.</p>
+        </div>
+      </div>
+      <div class="col-md-6 d-flex justify-content-end slide-in">
+        <img src="/images/profilepic.jpg" alt="Personal Picture" class="img-fluid" style="margin-right: 20px; max-width: 90%; border-radius: 20px; box-shadow: 8px 10px 50px rgba(0, 0, 0, 0.5);">
+      </div>
     </div>
-    <div class="image-section col-md-6 align-self-center">
-      <!-- Replace 'path-to-image.jpg' with the actual path to your image -->
-      <img src="/images/profilepic.jpg" alt="Fashion photography"></img>
-    </div>
+
+    <div class="scroll-indicator">
+    Scroll down for my Timeline<br> &blacktriangledown;
   </div>
-  <div class="text-center my-5">
-    <img src="/images/TimeLine.png" alt="time line" style="max-width: 100%; height: auto;"></img>
+
+    
+    <div class="row mt-5">
+      <div class="col-md-6">
+        <img src="/images/TimeLine.png" alt="Left Side Image" class="img-fluid" style="margin-right: 10px; ">
+      </div>
+      <div class="col-md-6 d-flex justify-content-end">
+        <img src="/images/Images.png" alt="Right Side Image" class="img-fluid" style="margin-left: 10px;">
+      </div>
+    </div>
   </div>
 </template>
 
 <style scoped>
-.container {
-  display: flex;
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
+.font-weight-bold {
+  font-weight: bold;
+}
+.boldtext {
+  font-family: FreeMono, monospace;
+  font-size: 20px;
+}
+.scroll-indicator {
+  text-align: center;
+  animation: bounce-text 2s infinite;
+  font-size: 30px;
+  margin-top: 60px;
 }
 
-.text-section {
-  padding: 0 1rem; /* Adjust padding as needed */
-  text-align: center; /* Center text */
+@keyframes bounce-text {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
 }
 
-.text-section h1 {
-  font-size: 1.5rem; /* Adjust the font size as needed */
-  margin-bottom: 1rem;
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-.text-section p {
-  font-size: 1rem;
-  color: #666; /* This is just an example color */
+@keyframes slideIn {
+  from { transform: translateY(50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
 
-.image-section img {
-  max-width: 100%; /* Make the image responsive */
-  height: auto;
+.fade-in {
+  animation: fadeIn 1s ease-out forwards;
 }
+
+.slide-in {
+  animation: slideIn 1s ease-out forwards;
+}
+
+
+
 </style>
+
+

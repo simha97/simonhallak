@@ -26,4 +26,5 @@
   height: 200px; /* Adjust the height as per your requirement */
   object-fit: cover; /* Ensures the image covers the entire space */
 }
+
 </style>
