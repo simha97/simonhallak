@@ -11,7 +11,7 @@
   
 <style scoped>
 .page {
-    background: linear-gradient(to bottom, #f4f2ed, #dcd9d0); /* Change the colors as needed */
+    background: linear-gradient(to bottom, #dfdbd2, #c4bfb1); /* Change the colors as needed */
     min-height: 100vh; /* Ensure the gradient covers the entire viewport height */
 
 }

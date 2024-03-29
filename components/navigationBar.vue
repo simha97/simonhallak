@@ -8,7 +8,7 @@
       <div class="collapse navbar-collapse" :class="{'show': navbarOpen}" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-            <nuxt-link to="/" class="nav-link" :class="{ 'active': isActive('/projects') }">Projects</nuxt-link>
+            <nuxt-link to="/" class="nav-link" :class="{ 'active': isActive('/projects') }">Portfolio</nuxt-link>
           </li>
           <li class="nav-item">
             <nuxt-link to="/aboutMe" class="nav-link" :class="{ 'active': isActive('/about-me') }">About Me</nuxt-link>

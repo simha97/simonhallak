@@ -30,7 +30,13 @@ const filteredProjects = computed(() => {
 
 <template>
   <div class="container mt-3">
-    <!-- Filter Tabs -->
+    
+    <div class="welcome-container">
+    <h1 class="welcome-heading">Welcome to my portfolio!</h1>
+    <p class="welcome-subtext">Enjoy my list of projects that I have completed and feel proud of</p>
+    </div>
+
+
     <div class="tabs">
       <button @click="setSelectedArea('all')" :class="{ 'active': selectedArea === 'all' }">All</button>
       <button @click="setSelectedArea('XR')" :class="{ 'active': selectedArea === 'XR' }">XR</button>
@@ -50,6 +56,26 @@ const filteredProjects = computed(() => {
 </template>
 
 <style scoped>
+
+.welcome-container {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.welcome-heading {
+  font-size: 2.5rem; /* 40px if the base font size is 16px */
+  margin-bottom: 20px; /* Adds some space between the heading and subtext */
+  font-weight: 600; /* Semi-bold for emphasis */
+  line-height: 1.2; /* Improves readability for larger text */
+}
+
+.welcome-subtext {
+  font-size: 1.5rem; /* 24px if the base font size is 16px */
+  color: #606060; /* A softer color for the subtext */
+  margin: 0 auto; /* Centers the text */
+  max-width: 600px; /* Ensures the text doesn't stretch too wide on larger screens */
+}
+
 .projects a {
     text-decoration: none !important; /* Remove underline from anchor tags */
 }
