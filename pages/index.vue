@@ -41,7 +41,6 @@ const filteredProjects = computed(() => {
       <button @click="setSelectedArea('all')" :class="{ 'active': selectedArea === 'all' }">All</button>
       <button @click="setSelectedArea('XR')" :class="{ 'active': selectedArea === 'XR' }">XR</button>
       <button @click="setSelectedArea('Web design')" :class="{ 'active': selectedArea === 'Web design' }">Web design</button>
-      <button @click="setSelectedArea('Visualisation')" :class="{ 'active': selectedArea === 'Visualisation' }">Visualisation</button>
       <button @click="setSelectedArea('Entrepreneurship')" :class="{ 'active': selectedArea === 'Entrepreneurship' }">Entrepreneurship</button>
     </div>
     <div class="row justify-content-center">

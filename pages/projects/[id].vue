@@ -38,10 +38,11 @@ onMounted(fetchProject)
     <div class="col-md-6">
       <h4>Description:</h4>
       <p>{{ project.description }}</p>
-      <h4>My contribution:</h4>
+
+      <h4><br>My contribution:</h4>
       <p>{{ project.contribution }}</p>
 
-      <h4>What I learned:</h4>
+      <h4><br>What I learned:</h4>
       <p>{{ project.learning }}</p>
 
       <div v-if="project.githubLink">
