@@ -32,6 +32,7 @@ const filteredProjects = computed(() => {
   <div class="container mt-3">
     
     <div class="welcome-container">
+    <h1 class="introduction"> <i>Hello!</i> <span class="intro_highlight">I am Simon</span> </h1>
     <h1 class="welcome-heading">Welcome to my portfolio!</h1>
     <p class="welcome-subtext">Enjoy my list of projects that I have completed and feel proud of</p>
     </div>
@@ -55,6 +56,16 @@ const filteredProjects = computed(() => {
 </template>
 
 <style scoped>
+
+.introduction{
+  margin-top: 60px;
+  margin-bottom: 30px;
+  font-size: 5.5rem;
+  font-family: 'Georgia', serif;;
+}
+.intro_highlight {
+  color: #9b4819; /* You can set any color you want here */
+}
 
 .welcome-container {
   text-align: center;
@@ -88,7 +99,7 @@ const filteredProjects = computed(() => {
     padding: 10px 20px;
     border: none;
     border-radius: 20px; /* Rounded corners */
-    background-color: #f0f0f0;
+    background-color: #bc996c;
     color: #333;
     font-weight: 500;
     cursor: pointer;
@@ -96,7 +107,7 @@ const filteredProjects = computed(() => {
 }
 
 .tabs button:hover, .tabs button.active {
-    background-color: #25384c; /* Darker shade on hover and for active button */
+    background-color: #9b4819; /* Darker shade on hover and for active button */
     color: #fff; /* White text on active/hover state */
 }
 

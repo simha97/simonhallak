@@ -5,7 +5,7 @@
       <div class="col-md-6 my-auto">
         <div class="text-container fade-in" style="margin-left: 20px;">
           <p class="font-weight-bold text-center boldtext">A Media Technology engineer who loves new adventures</p>
-          <p class="text-center">Just a simple guy who loves to learn, travel, culture, and pizza. <br><br>I've spent my time at university learning about different areas of digital design: including front-end development, app UX/UI, game development, and VR design. I have also gained valuable insights into entrepreneurship, leadership, and innovation. <br>I am currently working on my master's thesis in sleep enhancement by sounds.
+          <p class="text-center">Just a simple guy who loves to learn, travel, culture, and pizza. <br><br>I've spent my time at university learning about different areas of digital design: including front-end development, app UX/UI, game development, and VR design. I have also gained valuable insights into entrepreneurship, leadership, and innovation.
             <br><br>In my free time, I enjoy spending time with people, walking in the forest, and petting all the cute dogs and cats.</p>
         </div>
       </div>
