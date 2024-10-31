@@ -14,7 +14,7 @@
             <nuxt-link to="/aboutMe" class="nav-link" :class="{ 'active': isActive('/about-me') }">About Me</nuxt-link>
           </li>
           <li class="nav-item">
-            <a href="https://drive.google.com/file/d/1gQnXTZfWma4aTusttx5wJ9B11ada5pIv/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="nav-link" :class="{ 'active': isActive('/resume') }">Resume</a>
+            <a href="https://drive.google.com/file/d/1t7lyWdjpeF-Hk8Ky6-rZ2u7nHsJMQr_x/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="nav-link" :class="{ 'active': isActive('/resume') }">Resume</a>
           </li>
 
           <li class="nav-item">
