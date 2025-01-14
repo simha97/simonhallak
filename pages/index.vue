@@ -1,15 +1,19 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { createClient } from '@supabase/supabase-js'
-const supabase = createClient('https://zczbffrkrnrupttvvbvo.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpjemJmZnJrcm5ydXB0dHZ2YnZvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTAxNzc2MDUsImV4cCI6MjAyNTc1MzYwNX0.t4HDl0WdDRz2Vsg96yRsJn0x8OnzfHusEodWXUIoG78')
-const projects = ref([])
-const selectedArea = ref("all") // Add this line
 
+const supabase = createClient(import.meta.env.VITE_SUPABASE_URL, import.meta.env.VITE_SUPABASE_KEY)
+
+const projects = ref([]) // ref creates reactive reference , when the value changes vue updates this. empty array is the initial state
+const selectedArea = ref("all") //  all is the initial state
+console.log("ksd")
+console.log(import.meta.env.VITE_SUPABASE_URL)
 async function getProjects() {
   const { data } = await supabase.from('projects').select()
   projects.value = data
-}
+  console.log(projects.value[0]);
 
+}
 onMounted(() => {
   getProjects()
 })
@@ -36,8 +40,8 @@ const filteredProjects = computed(() => {
     <h1 class="welcome-heading">Welcome to my portfolio!</h1>
     <p class="welcome-subtext">Enjoy my list of projects that I have completed and feel proud of</p>
     </div>
-
-
+    <div>
+    </div>
     <div class="tabs">
       <button @click="setSelectedArea('all')" :class="{ 'active': selectedArea === 'all' }">All</button>
       <button @click="setSelectedArea('XR')" :class="{ 'active': selectedArea === 'XR' }">XR</button>
@@ -45,7 +49,6 @@ const filteredProjects = computed(() => {
       <button @click="setSelectedArea('Entrepreneurship')" :class="{ 'active': selectedArea === 'Entrepreneurship' }">Entrepreneurship</button>
     </div>
     <div class="row justify-content-center">
-      <!-- Use filteredProjects for v-for instead of projects -->
       <div v-for="project in filteredProjects" :key="project.id" class="projects col-md-4 d-flex align-items-stretch my-3">
         <NuxtLink :to="`/projects/${project.id}`">
           <card :title="project.name" :tags="project.tags" :date="project.date" :imageName="project.name" class="w-100"/>
