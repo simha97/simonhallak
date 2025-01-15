@@ -26,6 +26,14 @@
     "vue-youtube-embed": "^2.2.2"
   },
   "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^9.18.0",
+    "eslint-config-prettier": "^10.0.1",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "eslint-plugin-promise": "^7.2.1",
+    "eslint-plugin-vue": "^9.32.0",
     "vite-plugin-vuetify": "^2.0.3",
     "vuetify": "^3.5.9"
   }

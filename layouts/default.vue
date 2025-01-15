@@ -10,10 +10,11 @@
   
   
 <style scoped>
+
 .page {
     background: #f4f1e8; 
-
 }
+
 </style>
 
   

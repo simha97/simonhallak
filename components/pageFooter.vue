@@ -17,7 +17,7 @@
   </div>
 
   <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-    © 2024 Designed and Developed by me <3
+    © 2025 Designed and Developed by me &lt;3
   </div>
 </footer>
 </template>

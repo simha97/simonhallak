@@ -1,122 +1,156 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import { createClient } from '@supabase/supabase-js'
+import { fetchProjects } from '@/services/supabaseService'
+import projectCard from '~/components/projectCard.vue';
 
-const supabase = createClient(import.meta.env.VITE_SUPABASE_URL, import.meta.env.VITE_SUPABASE_KEY)
-
-const projects = ref([]) // ref creates reactive reference , when the value changes vue updates this. empty array is the initial state
+const projects = ref([{ id: 0, name: '', tags: '', date: '', area: '' }]); // ref creates reactive reference , when the value changes vue updates this. empty array is the initial state
 const selectedArea = ref("all") //  all is the initial state
-console.log("ksd")
-console.log(import.meta.env.VITE_SUPABASE_URL)
-async function getProjects() {
-  const { data } = await supabase.from('projects').select()
-  projects.value = data
-  console.log(projects.value[0]);
 
+async function getProjects() { 
+  try{
+      projects.value = await fetchProjects() //fetchProjects function is in supabaseService
+  }
+  catch (err){
+    console.error('Error fetching projects:', err)
+  }
 }
-onMounted(() => {
-  getProjects()
-})
 
-function setSelectedArea(area) {
+function setSelectedArea(area) { //function that changes the selectedArea. used when clicking on the button onClick
   selectedArea.value = area;
 }
 
-// Computed property to filter projects based on the selected area
 const filteredProjects = computed(() => {
-  if (selectedArea.value === "all") {
-    return projects.value;
+  let projectsToFilter = projects.value;
+
+  // Filter projects based on the selected area
+  if (selectedArea.value !== "all") {
+    projectsToFilter = projectsToFilter.filter(
+      project => project.area === selectedArea.value
+    );
   }
-  return projects.value.filter(project => project.area === selectedArea.value);
+
+ 
+  return projectsToFilter.sort((a, b) => a.id - b.id);  // Sort projects by id
 });
 
+onMounted(() => {
+  getProjects()
+})
 </script>
 
 <template>
-  <div class="container mt-3">
-    
-    <div class="welcome-container">
-    <h1 class="introduction"> <i>Hello!</i> <span class="intro_highlight">I am Simon</span> </h1>
-    <h1 class="welcome-heading">Welcome to my portfolio!</h1>
-    <p class="welcome-subtext">Enjoy my list of projects that I have completed and feel proud of</p>
+  <div class="container mt-4">
+    <section class="text-center p-4" role="banner" aria-labelledby="Introduction">
+    <h1 class="intro pt-5"> <i>Hello!</i> <span class="i-am">I am </span><span class="name">Simon</span> </h1>
+    <h3 class="fs-2 mb-5"> I develope, design, create and edit</h3>
+    <h2 class="mb-4">Welcome to my portfolio!</h2>
+    <p class="m-auto pb-5 text-secondary fs-4">Enjoy my list of projects that I have completed and feel proud of</p>
+    </section>
+
+    <div class="tabs mb-5">
+      <button
+          v-for="(area, index) in ['all', 'XR', 'Web Development', 'Product Design']"
+          :key="area"
+          :id="'b' + index" 
+          @click="setSelectedArea(area)"
+          :class="{ 'active': selectedArea === area}"
+          :aria-pressed="selectedArea === area"
+          >
+            {{ area }}
+      </button>
     </div>
     <div>
-    </div>
-    <div class="tabs">
-      <button @click="setSelectedArea('all')" :class="{ 'active': selectedArea === 'all' }">All</button>
-      <button @click="setSelectedArea('XR')" :class="{ 'active': selectedArea === 'XR' }">XR</button>
-      <button @click="setSelectedArea('Web design')" :class="{ 'active': selectedArea === 'Web design' }">Web design</button>
-      <button @click="setSelectedArea('Entrepreneurship')" :class="{ 'active': selectedArea === 'Entrepreneurship' }">Entrepreneurship</button>
-    </div>
-    <div class="row justify-content-center">
-      <div v-for="project in filteredProjects" :key="project.id" class="projects col-md-4 d-flex align-items-stretch my-3">
-        <NuxtLink :to="`/projects/${project.id}`">
-          <card :title="project.name" :tags="project.tags" :date="project.date" :imageName="project.name" class="w-100"/>
+      <div v-for="project in filteredProjects" :key="project.id" class="projects">
+        <NuxtLink :to="`/projects/${project.id}`" class="card-link">
+          <projectCard :imageName="project.name || 'default'"/>
         </NuxtLink>
       </div>
-    </div>
+      </div>
   </div>
 </template>
 
 <style scoped>
-
-.introduction{
-  margin-top: 60px;
-  margin-bottom: 30px;
-  font-size: 5.5rem;
-  font-family: 'Georgia', serif;;
-}
-.intro_highlight {
-  color: #9b4819; /* You can set any color you want here */
+.card-link{
+  display: flex;
+  margin: auto;
+  max-width: 50rem;
 }
 
-.welcome-container {
-  text-align: center;
-  padding: 40px 20px;
+.intro{
+  font-size: clamp(2.5rem, 5vw, 5.5rem);
+}
+.i-am {
+  color: #9b4819; 
 }
 
-.welcome-heading {
-  font-size: 2.5rem; /* 40px if the base font size is 16px */
-  margin-bottom: 20px; /* Adds some space between the heading and subtext */
-  font-weight: 600; /* Semi-bold for emphasis */
-  line-height: 1.2; /* Improves readability for larger text */
+.name{
+  background: #ffe69b;
+  transition: background 0.3s ease;
 }
 
-.welcome-subtext {
-  font-size: 1.5rem; /* 24px if the base font size is 16px */
-  color: #606060; /* A softer color for the subtext */
-  margin: 0 auto; /* Centers the text */
-  max-width: 600px; /* Ensures the text doesn't stretch too wide on larger screens */
+.name:hover{
+    background:none;
+    color: #ffffff;
+    text-shadow: 1px 1px 5px  #333;
 }
 
-.projects a {
-    text-decoration: none !important; /* Remove underline from anchor tags */
-}
+
 .tabs {
     display: flex;
-    flex-wrap: wrap;
-    gap: 10px; /* Adds some space between buttons */
-    margin-bottom: 20px;
+    justify-content: center;
+    gap: 10px; 
 }
+
 .tabs button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 20px; /* Rounded corners */
-    background-color: #bc996c;
-    color: #333;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
+  padding: 10px 20px;
+  border: 1px solid #a7a7a7; 
+  border-radius: 20px; 
+  background-color: #fafafa;
+  color: #333;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
 }
+
 
 .tabs button:hover, .tabs button.active {
-    background-color: #9b4819; /* Darker shade on hover and for active button */
-    color: #fff; /* White text on active/hover state */
+    background-color: #b47f60; 
+    color: #fff; 
+    border: none;
+    text-shadow: 1px 1px 5px  #333;
 }
 
-/* Styling for indicating the active tab */
-.tabs button.active {
-    font-weight: bold;
+#b1:hover, #b1.active{
+  background-color: #75b1e8; 
+  
 }
+
+#b2:hover, #b2.active{
+  background-color: #fce292; 
+}
+
+#b3:hover, #b3.active{
+  background-color: #89dec5; 
+}
+
+@media (max-width: 768px) {
+    .tabs button {
+        padding: 8px 16px; 
+        font-size: 0.9rem; 
+        border-radius: 15px;
+    }
+
+    .tabs {
+        gap: 5px;
+    }
+}
+
+@media (max-width: 480px) {
+    .tabs button {
+        padding: 6px 12px; 
+        font-size: 0.8rem; 
+    }
+}
+
 </style>
 
