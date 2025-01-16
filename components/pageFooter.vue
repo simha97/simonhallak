@@ -1,43 +1,75 @@
 <template>
-    <footer class="bgcolor text-center">
-  <div class="container p-4 pb-0">
-    <section class="mb-4">
-          <p>Phone: +46760611353</p>
-          <p>Email: simon.hallak.3@gmail.com</p>      
-          <!-- Linkedin -->
-            <a class="btn btn-outline-light btn-floating m-1" href="https://www.linkedin.com/in/simon-hallak-2738a318b/" role="button" target="_blank">
-        <img src="/images/linkedin.png" alt="LinkedIn" style="width: 24px; height: 24px;">
-      </a>
+  <footer class="footer p-1 text-center">
+    <div class="container p-4 pb-0">
+      <section class="contact-info mb-4">
+        <p aria-label="Phone number">Phone: +46760611353</p>
+        <p aria-label="Email address">Email: simon.hallak.3@gmail.com</p>
 
-      <!-- Github -->
-      <a class="btn btn-outline-light btn-floating m-1" href="https://github.com/simha97" role="button" target="_blank">
-        <img src="/images/github.png" alt="GitHub" style="width: 24px; height: 24px;">
-      </a>
-    </section>
-  </div>
+        <a 
+          class="btn btn-outline-light btn-floating m-1" 
+          href="https://www.linkedin.com/in/simon-hallak-2738a318b/" 
+          role="button" 
+          target="_blank" 
+          aria-label="Visit LinkedIn profile"
+        >
+          <img 
+            src="/images/linkedin.png" 
+            alt="LinkedIn" 
+            style="width: 24px; height: 24px;"
+          >
+        </a>
 
-  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-    © 2025 Designed and Developed by me &lt;3
-  </div>
-</footer>
+        <a 
+          class="btn btn-outline-light btn-floating m-1" 
+          href="https://github.com/simha97" 
+          role="button" 
+          target="_blank" 
+          aria-label="Visit GitHub profile"
+        >
+          <img 
+            src="/images/github.png" 
+            alt="GitHub" 
+            style="width: 24px; height: 24px;"
+          >
+        </a>
+      </section>
+    </div>
+
+    <div 
+      class="footer-bottom text-center p-3 " 
+      aria-label="Footer credits"
+    >
+      © 2025 Designed and Developed by me &lt;3
+    </div>
+  </footer>
 </template>
 
 <style scoped>
-.footer-line {
-  border-top: 1px solid black;
-  margin-bottom: 10px;
+
+.footer {
+  background-color: #FFEEDD;
+}
+
+.contact-info p {
+  margin: 0;
+  padding: 0.5rem 0;
+  color: #000;
+}
+
+.footer-bottom {
+  font-size: 0.9rem;
+  background-color: #f6dfcf;
 }
 
 a {
-  color: currentColor; /* Ensures icons match the text color */
-  margin-left: 10px; /* Space out icons */
+  color: currentColor;
+  margin-left: 10px; 
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Optional: Add hover effect for icons */
 a:hover {
-  color: #007bff; /* Change as per your theme color */
-}
-.bgcolor{
-  background-color: rgba(0, 0, 0, 0.129);
+  color: #007bff; /* Change hover color to match theme */
 }
 </style>

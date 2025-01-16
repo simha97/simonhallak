@@ -12,7 +12,7 @@
 <style scoped>
 
 .page {
-    background: #f4f1e8; 
+    background: #f6f3f9; 
 }
 
 </style>

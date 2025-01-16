@@ -13,6 +13,6 @@ html, body {
   line-height: 1.6; /* Improves readability */
   margin: 0;
   padding: 0;
-  background: #f4f1e8; /* Sets a global background */
+  background: #F8F7FF; /* Sets a global background */
 }
 </style>

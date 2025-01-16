@@ -1,138 +1,140 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import { useRouter } from 'vue-router'
-import { createClient } from '@supabase/supabase-js'
+import { fetchProject } from '@/services/supabaseService'
+import { useRoute } from 'vue-router';
 
-const router = useRouter()
 const project = ref(null)
+const route = useRoute();
+const projectId = route.params.id;
 
-const supabase = createClient('https://zczbffrkrnrupttvvbvo.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpjemJmZnJrcm5ydXB0dHZ2YnZvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTAxNzc2MDUsImV4cCI6MjAyNTc1MzYwNX0.t4HDl0WdDRz2Vsg96yRsJn0x8OnzfHusEodWXUIoG78')
-
-async function fetchProject() {
-  const projectId = router.currentRoute.value.params.id
-  const { data, error } = await supabase
-    .from('projects')
-    .select('*')
-    .eq('id', projectId)
-    .single()
-
-  if (data) {
-    project.value = data
-  } else {
-    console.error(error)
+async function getProject() { 
+  try{
+      project.value = await fetchProject(projectId) //fetchProjects function is in supabaseService
+      console.log("here is",project.value)
+  }
+  catch (err){
+    console.error('Error fetching projects:', err)
   }
 }
 
-
-onMounted(fetchProject)
+onMounted(() => {
+  getProject()
+})
 
 </script>
 
 <template>
-  <div v-if="project" class="mx-5 mt-5">
-    
-    <h1 class= "">{{ project.name }} </h1>
-    <p class= "">{{ project.tags }}</p>
-    <p>Date of the project: {{ project.date }}</p>
-    <div class="row">
-    <div class="col-md-6">
-      <h4>Description:</h4>
-      <p>{{ project.description }}</p>
+  <div v-if="project" class="page-body">
+  <h1 aria-label="Project name">{{ project.name }}</h1>
+  <p aria-label="Project tags">{{ project.tags }}</p>
 
-      <h4><br>My contribution:</h4>
-      <p>{{ project.contribution }}</p>
+  <div class="links">
+    <a v-if="project.githubLink" :href="project.githubLink" role="button" target="_blank" area-label="View project on GitHub">
+      <img src="/images/github.png" alt="GitHub" style="width: 24px; height: 24px;">
+    </a>
 
-      <h4><br>What I learned:</h4>
-      <p>{{ project.learning }}</p>
+    <a v-if="project.websiteLink" :href="project.websiteLink" role="button" target="_blank" area-label="Visit project website">
+        <img src="/images/websiteIcon.png" alt="Website" style="width: 24px; height: 24px;">
+    </a>
 
-      <div v-if="project.githubLink">
-        <a :href="project.githubLink" target="_blank">Here is the link to the github repository</a>
-      </div>
-      <div v-if="project.websiteLink">
-        <a :href="project.websiteLink" target="_blank">Here is a link to the project website</a>
-      </div>
-      <div v-if="project.prototypeLink">
-        <a :href="project.prototypeLink" target="_blank">Here is a link to the prototype</a>
-      </div>
-        <div v-if="project.pdfLink">
-        <a :href="project.pdfLink" target="_blank">Here is a link to the PDF</a>
-      </div>
+    <a v-if="project.prototypeLink" :href="project.prototypeLink" role="button" target="_blank" aria-label="View project prototype">
+        <img src="/images/websiteIcon.png" alt="Prototype" style="width: 24px; height: 24px;">
+    </a>
 
-    </div>
-    <div class="col-md-6">
-
-      <div class="my-3">
-        <div v-if="project.videoid1">
-          <vue-plyr>
-            <div class="plyr__video-embed">
-              <iframe
-                :src="`https://www.youtube.com/embed/${project.videoid1}?amp;iv_load_policy=3&amp;modestbranding=1&amp;playsinline=1&amp;showinfo=0&amp;rel=0&amp;enablejsapi=1`"
-                allowfullscreen
-                allowtransparency
-                allow="autoplay"
-              ></iframe>
-            </div>
-          </vue-plyr> 
-          </div>
-          <div v-else class="image-embed">
-              <img :src="`/images/${project.name}1.png`">
-          </div>
-          <div v-if="project.videoid2">
-            <vue-plyr>
-              <div class="plyr__video-embed my-5">
-                <iframe
-                  :src="`https://www.youtube.com/embed/${project.videoid2}?amp;iv_load_policy=3&amp;modestbranding=1&amp;playsinline=1&amp;showinfo=0&amp;rel=0&amp;enablejsapi=1`"
-                  allowfullscreen
-                  allowtransparency
-                  allow="autoplay"
-                ></iframe>
-              </div>
-            </vue-plyr> 
-          </div>
-          <div v-else class="image-embed my-5">
-              <img :src="`/images/${project.name}2.png`">
-          </div>
-        </div>
-    </div>
-  </div>
+    <a v-if="project.pdfLink" :href="project.pdfLink" role="button" target="_blank" aria-label="Download project PDF">
+        <img src="/images/websiteIcon.png" alt="PDF" style="width: 24px; height: 24px;">
+    </a>
 
   </div>
-  <div v-else>
-    <p>Loading project...</p>
-  </div>
+   
+  <p aria-label="Project date">Date of the project: {{ project.date }}</p>
+
+  <h4 aria-label="Project description">Description:</h4>
+  <p>{{ project.description }}</p>
+
+  <vue-plyr v-if="project.videoid1">
+      <iframe
+        :src="`https://www.youtube.com/embed/${project.videoid1}?amp;iv_load_policy=3&amp;modestbranding=1&amp;playsinline=1&amp;showinfo=0&amp;rel=0&amp;enablejsapi=1`"
+        allowfullscreen
+        allowtransparency
+        allow="autoplay"
+        class="my-4"
+        aria-label="Project video 1"
+
+      ></iframe>
+  </vue-plyr>
+  <img v-else :src="`/images/${project.name}1.png`"  class="my-4" :alt="`${project.name} screenshot 1`"
+/>
+
+  <h4 aria-label="Contribution to project">My contribution:</h4>
+  <p>{{ project.contribution }}</p>
+
+  <h4 aria-label="Lessons learned">What I learned:</h4>
+  <p>{{ project.learning }}</p>
+
+  <vue-plyr v-if="project.videoid2">
+      <iframe
+        :src="`https://www.youtube.com/embed/${project.videoid2}?amp;iv_load_policy=3&amp;modestbranding=1&amp;playsinline=1&amp;showinfo=0&amp;rel=0&amp;enablejsapi=1`"
+        allowfullscreen
+        allowtransparency
+        allow="autoplay"
+        class="my-4"
+        aria-label="Project video 2"
+      ></iframe>
+  </vue-plyr>
+  <img v-else :src="`/images/${project.name}2.png`"  class="my-4" :alt="`${project.name} screenshot 2`"
+  />
+
+ 
+</div>
+
+<p v-else>Loading project...</p>
 </template>
 
 
 <style scoped>
-/* Add some styles to ensure the video stays within its column */
-.plyr__video-embed {
-  max-width: 100%;
+.page-body{
+  margin: 8rem 20rem 3rem 20rem;
+
+}
+
+.links{
+  display:flex;
+  justify-content: flex-end;
+  gap: 3rem;
+  
+}
+
+
+iframe {
+  display: block;
+  width: 100%;
+  max-width: 50rem;
+  margin: auto;
+  aspect-ratio: 16/9;
+  border: 0; 
+}
+
+img {
+  display: block;
+  width: 100%;
+  max-width: 50rem;
+  margin: 0 auto; 
   height: auto;
-  position: relative;
-  overflow: hidden;
 }
 
-.plyr__video-embed iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
+@media (max-width: 1042px) {
+  .page-body{
+    margin: 3rem;
+  }
 
-.image-embed {
-  position: relative;
-  overflow: hidden;
-  padding-top: 56.25%; /* 16:9 Aspect Ratio */
+  .links{
+  display:flex;
+  justify-content: flex-start;
+  margin: 2rem;
+  gap: 3rem;
+  
 }
-
-.image-embed img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Cover ensures the image covers the padding area; adjust as necessary */
 }
 
 </style>
