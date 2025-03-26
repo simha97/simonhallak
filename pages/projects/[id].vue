@@ -63,7 +63,7 @@ onMounted(() => {
 
       ></iframe>
   </vue-plyr>
-  <img v-else :src="`/images/${project.name}1.png`"  class="my-4" :alt="`${project.name} screenshot 1`"
+  <img v-else :src="`/images/${project.name}1.png`"  class="my-4 shadow-lg" :alt="`${project.name} screenshot 1`"
 />
 
   <h4 aria-label="Contribution to project">My contribution:</h4>
@@ -82,8 +82,28 @@ onMounted(() => {
         aria-label="Project video 2"
       ></iframe>
   </vue-plyr>
-  <img v-else :src="`/images/${project.name}2.png`"  class="my-4" :alt="`${project.name} screenshot 2`"
+  <img v-else :src="`/images/${project.name}2.png`"  class="my-4 shadow-lg" :alt="`${project.name} screenshot 2`"
   />
+
+
+  <div class="links">
+    <a v-if="project.githubLink" :href="project.githubLink" role="button" target="_blank" area-label="View project on GitHub">
+      Visit project's Github
+    </a>
+
+    <a v-if="project.websiteLink" :href="project.websiteLink" role="button" target="_blank" area-label="Visit project website">
+      Visit project's website
+    </a>
+
+    <a v-if="project.prototypeLink" :href="project.prototypeLink" role="button" target="_blank" aria-label="View project prototype">
+      Link to project
+    </a>
+
+    <a v-if="project.pdfLink" :href="project.pdfLink" role="button" target="_blank" aria-label="Download project PDF">
+      Link to pdf
+    </a>
+
+  </div>
 
  
 </div>
