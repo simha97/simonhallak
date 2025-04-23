@@ -67,7 +67,7 @@ onMounted(() => {
       </a>
     </div>
   </section>
-        <h2 class="text-center mb-3">Selected projects</h2>
+        <h2 class="text-center mb-3">Selected Projects</h2>
         <h3 class="text-center fs-5 mb-3">Click to read more about each project</h3>
 
     <div class="tabs mb-5">
